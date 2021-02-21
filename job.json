@@ -1,0 +1,13 @@
+{
+  "paper_build": "latest",
+  "version": "1.16.5",
+  "properties": "server.properties",
+  "subject": {
+    "ScreamingBedWars": "https://ci.screamingsandals.org/job/BedWars-0.x.x/733/artifact/plugin/build/libs/BedWars-0.3.0-SNAPSHOT-733.jar",
+    "SBAHypixelify": "https://ci.screamingsandals.org/job/SBAHypixelify/116/artifact/plugin/build/libs/SBAHypixelify-2.0.0-SNAPSHOT-all.jar"
+  },
+  "dependencies": {
+    "PlaceholderAPI": "https://github.com/PlaceholderAPI/PlaceholderAPI/releases/download/2.10.9/PlaceholderAPI-2.10.9.jar",
+    "ProtocolLib": "https://github.com/dmulloy2/ProtocolLib/releases/download/4.6.0/ProtocolLib.jar"
+  }
+}
