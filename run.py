@@ -6,7 +6,7 @@ from termcolor import colored
 if __name__ == '__main__':
     with open('config.json') as config_json:
         cfg = json.load(config_json)
-    print("PlugDeploy " + cfg['version'] + "\n")
+    print("PaperPacker " + cfg['version'] + "\n")
     if not exists(cfg['job_path']):
         print(colored("No job configs!", "red"))
         exit(-1)
