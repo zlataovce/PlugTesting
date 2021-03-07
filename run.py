@@ -1,7 +1,7 @@
 import json
 from os.path import exists
 from libs.jobs import Deploy
-from termcolor import colored
+from libs.termcolor import colored
 
 if __name__ == '__main__':
     with open('config.json') as config_json:
