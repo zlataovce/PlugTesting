@@ -1,5 +1,6 @@
 import json
 import requests
+import re
 
 
 class JenkinsAPI:
@@ -14,7 +15,7 @@ class JenkinsAPI:
     def latest(self, keyword):
         buildendpoint = None
         for i in self.response['artifacts']:
-            if keyword in i['fileName']:
+            if re.search(keyword, i['displayPath']):
                 if "api/json?pretty=true" in self.endpoint:
                     buildendpoint = self.endpoint.replace("api/json?pretty=true", "artifact/" + i['relativePath'])
                 elif "api/json" in self.endpoint:
