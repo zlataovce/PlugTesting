@@ -3,6 +3,8 @@ from os.path import exists
 from shutil import rmtree, copyfile, make_archive
 from libs.paper_api import PaperAPI
 from urllib.request import urlretrieve
+from libs.jenkins_api import JenkinsAPI
+from libs.github_api import GitHubAPI
 
 
 class Deploy:
@@ -37,13 +39,37 @@ class Deploy:
         print("Resolving dependencies...")
         for i in self.job_cfg['dependencies']:
             print("Getting " + i + "...")
-            urlretrieve(self.job_cfg['dependencies'][i], self.job_folder + "\\plugins\\" + i + ".jar")
+            if self.job_cfg['dependencies'][i]["jenkins"][0] is True:
+                api = JenkinsAPI(self.job_cfg['dependencies'][i]["url"])
+                url = api.latest(self.job_cfg['dependencies'][i]["jenkins"][-1])
+                urlretrieve(url, self.job_folder + "\\plugins\\" + i + ".jar")
+            elif self.job_cfg['dependencies'][i]["github"][0] is True:
+                api = GitHubAPI(self.job_cfg['dependencies'][i]["url"])
+                if self.job_cfg['dependencies'][i]["github"][-1] is None:
+                    url = api.latest(None)
+                else:
+                    url = api.latest(self.job_cfg['dependencies'][i]["github"][-1])
+                urlretrieve(url, self.job_folder + "\\plugins\\" + i + ".jar")
+            else:
+                urlretrieve(self.job_cfg['dependencies'][i]["url"], self.job_folder + "\\plugins\\" + i + ".jar")
 
     def resolve_subjects(self):
         print("Resolving testing subjects...")
         for i in self.job_cfg['subject']:
             print("Getting " + i + "...")
-            urlretrieve(self.job_cfg['subject'][i], self.job_folder + "\\plugins\\" + i + ".jar")
+            if self.job_cfg['subject'][i]["jenkins"][0] is True:
+                api = JenkinsAPI(self.job_cfg['subject'][i]["url"])
+                url = api.latest(self.job_cfg['subject'][i]["jenkins"][-1])
+                urlretrieve(url, self.job_folder + "\\plugins\\" + i + ".jar")
+            elif self.job_cfg['subject'][i]["github"][0] is True:
+                api = GitHubAPI(self.job_cfg['subject'][i]["url"])
+                if self.job_cfg['subject'][i]["github"][-1] is None:
+                    url = api.latest(None)
+                else:
+                    url = api.latest(self.job_cfg['subject'][i]["github"][-1])
+                urlretrieve(url, self.job_folder + "\\plugins\\" + i + ".jar")
+            else:
+                urlretrieve(self.job_cfg['subject'][i]["url"], self.job_folder + "\\plugins\\" + i + ".jar")
 
     def finalize(self):
         print("Packing artifacts...")
