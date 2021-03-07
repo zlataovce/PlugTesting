@@ -5,7 +5,7 @@ from libs.paper_api import PaperAPI
 from urllib.request import urlretrieve
 from libs.jenkins_api import JenkinsAPI
 from libs.github_api import GitHubAPI
-from termcolor import colored
+from libs.termcolor import colored
 
 
 class Deploy:
