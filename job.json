@@ -5,7 +5,7 @@
   "subject": {
     "ScreamingBedWars": {
       "url": "https://ci.screamingsandals.org/job/BedWars-0.x.x",
-      "jenkins": [true, "all"],
+      "jenkins": [true, "-\\d+.jar"],
       "github": false
     },
     "SBAHypixelify": {
