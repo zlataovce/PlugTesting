@@ -73,5 +73,8 @@ class Deploy:
                 urlretrieve(self.job_cfg['subject'][i]["url"], self.job_folder + "/plugins/" + i + ".jar")
 
     def finalize(self):
+        if self.cfg['windows_mode'] is True:
+            with open(self.job_folder + "/start.bat", "w") as f:
+                f.write("java -jar paper.jar\npause")
         print(colored("Packing artifacts...", "cyan"))
         make_archive(self.cfg['jobs_directory'] + "/artifact" + self.build_number, "zip", self.job_folder)
